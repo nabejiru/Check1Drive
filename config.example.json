@@ -1,0 +1,19 @@
+{
+    "tenant_id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "client_id" : "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
+    "redirect_url" : "http://localhost/logined",
+    "secret" : "aAb2*NUngqmA6inD)RFftGV4zwN$XBk.vpaf|XZm",
+    "threthold_percent" : 100,
+
+    "to_addresses": ["hoge@xxxxx.jp"],
+
+    "mail": {
+        "from_address": "piyo@xxxx.com",    
+        "smtp_address":"mail.xxxx.com",
+        "port": 587,
+        "enable_ssl": true,
+        "user":"piyo@xxxx.com",
+        "password" : "Qk$xQm,WE$+5"
+    }
+}
+
