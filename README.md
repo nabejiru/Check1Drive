@@ -55,6 +55,6 @@ $ ./Check1Drive.ps1 -User someuser@some_tenant.onmicrosoft.com -EnableNotificati
 
 ## ライセンス
 
-Check1Drive はMIT licenseで利用できるものとします。
+Check1Drive は[MIT license](LICENSE)で利用できるものとします。
 
 本プログラムは自己責任の元利用ください。もし何らかの損害が発生することがあっても、制作者は一切の責任を負いません。
