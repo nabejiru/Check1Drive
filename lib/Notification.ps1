@@ -14,8 +14,8 @@ function Send-Mail {
         {
             "from_address": "送信元ールアドレス",    
             "smtp_address":"SMTPサーバのアドレス",
-            "port": SMTPサーバのポート番号,
-            "enable_ssl": SSL使用,
+            "port": SMTPサーバのポート番号（数値）,
+            "enable_ssl": SSL(TLS)使用の有無。使用する場合はtrue,
             "user":"メールサーバのユーザID",
             "password" : "メールサーバのパスワード"
         }
