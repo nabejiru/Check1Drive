@@ -10,8 +10,6 @@
   ここでは、確認したいドライブのオーナーでログインしてください。
 .PARAMETER ConfigFile
   設定ファイルのパス。デフォルトは"./config.json"です。
-.PARAMETER DriveOwner
-  OneDriveのアカウント名を指定します。これはメール通知時の本文に使用します。
 .PARAMETER EnableNotification
   残量警告メールの送信有無を指定します。デフォルトはtrueです。
 .NOTES  
@@ -24,7 +22,6 @@ https://learn.microsoft.com/ja-jp/onedrive/developer/rest-api/getting-started/ap
 
 #>
 PARAM(
-    [string]$DriveOwner,
     [string]$ConfigFile = "./config.json",
     [switch]$EnableNotification = $true
 )
@@ -68,7 +65,7 @@ function toGiga
 }
 
 
-$scope = "Files.Read.All offline_access User.Read.All User.ReadBasic.All Sites.Read.All"
+$scope = "Files.Read.All offline_access"
     
 #認証
 write-information("コード認証を行います...")
@@ -100,7 +97,12 @@ $percent = floor -Value ($drive.quota.remaining / $drive.quota.total * 100) -dig
 $remainGiga = toGiga -value $drive.quota.remaining
 $totalGiga = toGiga -value $drive.quota.total
 
-write-host( "総容量=${totalGiga}GB  残り=${remainGiga}GB（$percent%）")
+write-host("owner     : $($drive.owner.user.email)")
+write-host("deleted   : $($drive.quota.deleted)")
+write-host("used      : $($drive.quota.used)")
+write-host("remaining : $($drive.quota.remaining) ($percent%)")
+write-host("total     : $($drive.quota.total)")
+
 write-verbose("しきい値=$($settings.threthold_percent)%")
 
 # 容量が少ない場合はメール通知する
@@ -109,7 +111,7 @@ if (($EnableNotification) -And ($percent -le $settings.threthold_percent)) {
     $body= @"
 OneDriveの残り容量が$($settings.threthold_percent)%以下になりました。
 
-# アカウント: $($DriveOwner)
+# アカウント: $($drive.owner.user.email)
 # 総容量=${totalGiga}GB  残り=${remainGiga}GB（$percent%）
 "@
 

@@ -28,10 +28,10 @@ OneDrive for Buisiness の残り容量・最大容量を取得するPowershell�
 ## コマンド例
 
 ``` powershell
-$ ./Check1Drive.ps1 -User someuser@some_tenant.onmicrosoft.com
+$ ./Check1Drive.ps1
 
 # メール送信を行わない場合
-$ ./Check1Drive.ps1 -User someuser@some_tenant.onmicrosoft.com -EnableNotification $false
+$ ./Check1Drive.ps1 -EnableNotification $false
 ```
 
 ### !!!注意!!!
