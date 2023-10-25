@@ -72,6 +72,10 @@ $scope = "Files.Read.All offline_access User.Read.All User.ReadBasic.All Sites.R
     
 #認証
 write-information("コード認証を行います...")
+
+# TSL1.2通信を許可する（WindowsServer系でInvalidOperationが発生する対策）
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $auth = ODAuthentication -ClientID $settings.client_id -AppKey $settings.secret -RedirectURI $settings.redirect_url -TenantId $settings.tenant_id -Scope $scope
 write-verbose($auth)
 
@@ -109,6 +113,6 @@ OneDriveの残り容量が$($settings.threthold_percent)%以下になりました。
 # 総容量=${totalGiga}GB  残り=${remainGiga}GB（$percent%）
 "@
 
-    write-host("容量が残り$($settings.threthold_percent)%以下のためメールを送信しました。")
+    write-warning("容量が残り$($settings.threthold_percent)%以下のためメールを送信しました。")
     Send-Mail -Subject $subject -Body $body -ToAddresses $settings.to_addresses -Settings $settings.mail
 }
